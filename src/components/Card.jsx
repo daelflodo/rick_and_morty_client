@@ -1,4 +1,3 @@
-// import styles from './Card.module.css';
 import styles from './Card.module.css';
 
 export default function Card(props) {
@@ -10,38 +9,42 @@ export default function Card(props) {
             : styles.unknown;
 
    return (
-      <main className={styles.card}>
-         <div className={styles.imageWrapper}>
-            <img src={props.image} alt={props.name} className={styles.image} />
-            <div className={styles.imageOverlay} />
-            <button className={styles.closeBtn} onClick={props.onClose}>
-               ✕
-            </button>
-         </div>
+      <div className={styles.card}>
+         <div className={styles.content}>
 
-         <div className={styles.body}>
-            <h2 className={styles.name}>{props.name}</h2>
-
-            <div className={styles.statusRow}>
-               <span className={`${styles.statusDot} ${statusClass}`} />
-               <span className={styles.statusText}>
-                  {props.status} — {props.species}
-               </span>
-            </div>
-
-            <hr className={styles.divider} />
-
-            <div className={styles.infoGrid}>
-               <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>Gender</span>
-                  <span className={styles.infoValue}>{props.gender}</span>
-               </div>
-               <div className={`${styles.infoItem} ${styles.fullRow}`}>
-                  <span className={styles.infoLabel}>Origin</span>
-                  <span className={styles.infoValue}>{props.origin}</span>
+            {/* Back face — character image with spinning border */}
+            <div className={styles.back}>
+               <div className={styles.backContent}>
+                  <img src={props.image} alt={props.name} className={styles.backImage} />
+                  <div className={styles.backOverlay} />
+                  <strong className={styles.backName}>{props.name}</strong>
                </div>
             </div>
+
+            {/* Front face — revealed on hover */}
+            <div className={styles.front}>
+               <div className={styles.img}>
+                  <div className={styles.circle} />
+                  <div className={`${styles.circle} ${styles.circleRight}`} />
+                  <div className={`${styles.circle} ${styles.circleBottom}`} />
+               </div>
+               <div className={styles.frontContent}>
+                  <small className={styles.badge}>{props.species}</small>
+                  <div className={styles.description}>
+                     <div className={styles.titleRow}>
+                        <p className={styles.charName}><strong>{props.name}</strong></p>
+                        <span className={`${styles.statusDot} ${statusClass}`} />
+                     </div>
+                     <p className={styles.cardFooter}>
+                        {props.status}&nbsp;|&nbsp;{props.gender}
+                     </p>
+                     <p className={styles.origin}>{props.origin}</p>
+                  </div>
+               </div>
+               <button className={styles.closeBtn} onClick={props.onClose}>✕</button>
+            </div>
+
          </div>
-      </main>
+      </div>
    );
 }

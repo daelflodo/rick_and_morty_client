@@ -1,0 +1,98 @@
+/* ===== Navbar ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: rgba(17, 17, 44, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  /* quiero q los elementos del nav esten separados */
+  flex-wrap: inherit;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.inner {
+  padding: 0 32px;
+  height: 68px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* ===== Brand / Logo ===== */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.portalRing {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #c8f06e, #97ce4c 45%, #3a7d0a 100%);
+  box-shadow:
+    0 0 10px rgba(151, 206, 76, 0.6),
+    0 0 22px rgba(151, 206, 76, 0.25);
+  flex-shrink: 0;
+  animation: portalPulse 3s ease-in-out infinite;
+}
+
+@keyframes portalPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(151, 206, 76, 0.6), 0 0 22px rgba(151, 206, 76, 0.25); }
+  50%       { box-shadow: 0 0 18px rgba(151, 206, 76, 0.9), 0 0 38px rgba(151, 206, 76, 0.4); }
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brandMain {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #f0f0f0;
+  letter-spacing: 0.3px;
+}
+
+.brandSub {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #97ce4c;
+  margin-top: 3px;
+}
+
+/* ===== Search area ===== */
+.searchArea {
+  display: flex;
+  align-items: center;
+  width: 420px;
+  min-width: 0;
+  margin-left: auto;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .inner {
+    flex-direction: column;
+    height: auto;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .searchArea {
+    width: 100%;
+  }
+}
