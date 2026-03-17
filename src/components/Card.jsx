@@ -1,3 +1,4 @@
+// import styles from './Card.module.css';
 import styles from './Card.module.css';
 
 export default function Card(props) {
@@ -5,8 +6,8 @@ export default function Card(props) {
       props.status === 'Alive'
          ? styles.alive
          : props.status === 'Dead'
-         ? styles.dead
-         : styles.unknown;
+            ? styles.dead
+            : styles.unknown;
 
    return (
       <main className={styles.card}>
