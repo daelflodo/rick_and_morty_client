@@ -88,14 +88,25 @@
   pointer-events: none;
 }
 
-.backName {
+.backNameLink {
   position: relative;
   z-index: 1;
+  text-decoration: none;
   margin-bottom: 14px;
+}
+
+.backNameLink:hover .backName {
+  color: #97ce4c;
+  text-shadow: 0 0 8px rgba(151, 206, 76, 0.6);
+}
+
+.backName {
   font-size: 0.9rem;
   color: #fff;
   text-align: center;
   padding: 0 10px;
+  transition: color 0.2s, text-shadow 0.2s;
+  margin: 0;
 }
 
 @keyframes rotation_481 {

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Card.module.css';
 
 export default function Card(props) {
@@ -17,7 +18,9 @@ export default function Card(props) {
                <div className={styles.backContent}>
                   <img src={props.image} alt={props.name} className={styles.backImage} />
                   <div className={styles.backOverlay} />
+                  <Link to={`/detail/${props.id}`} className={styles.backNameLink}>
                   <strong className={styles.backName}>{props.name}</strong>
+               </Link>
                </div>
             </div>
 
