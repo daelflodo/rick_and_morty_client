@@ -16,6 +16,7 @@ export default function Card(props) {
             {/* Back face — character image with spinning border */}
             <div className={styles.back}>
                <div className={styles.backContent}>
+                  <span className={styles.idBadge}>#{props.id}</span>
                   <img src={props.image} alt={props.name} className={styles.backImage} />
                   <div className={styles.backOverlay} />
                   <Link to={`/detail/${props.id}`} className={styles.backNameLink}>

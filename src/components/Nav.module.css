@@ -116,6 +116,27 @@
 }
 
 /* ===== Logout button ===== */
+.randomBtn {
+  flex-shrink: 0;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(97, 218, 97, 0.9);
+  background: transparent;
+  border: 1px solid rgba(97, 218, 97, 0.45);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.randomBtn:hover {
+  color: #fff;
+  border-color: rgba(97, 218, 97, 0.8);
+  background: rgba(97, 218, 97, 0.15);
+}
+
 .logoutBtn {
   flex-shrink: 0;
   padding: 6px 18px;
