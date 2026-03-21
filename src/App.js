@@ -4,10 +4,34 @@ import Nav from './components/Nav.jsx';
 import About from './components/About.jsx';
 import Detail from './components/Detail.jsx';
 import ErrorPage from './components/Error.jsx';
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import Form from './components/Form.jsx';
+import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 function App() {
+   const navigate = useNavigate();
+   const location = useLocation();
+   const [access, setAccess] = useState(false);
+   const EMAIL = 'dael@gmail.com';
+   const PASSWORD = 'dael123';
+
+   function login(userData) {
+      if (userData.email === EMAIL && userData.password === PASSWORD) {
+         setAccess(true);
+         navigate('/home');
+      } else {
+         window.alert('Email o contraseña incorrectos.');
+      }
+   }
+
+   function logout() {
+      setAccess(false);
+   }
+
+   useEffect(() => {
+      if (!access) navigate('/');
+   }, [access]);
+
    const [characters, setCharacters] = useState([]);
    const example = {
       id: 1,
@@ -52,8 +76,9 @@ function App() {
 
    return (
       <div className='App'>
-         <Nav onSearch={onSearch} />
+         {location.pathname !== '/' && <Nav onSearch={onSearch} logout={logout} />}
          <Routes>
+            <Route path='/' element={<Form login={login} />} />
             <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
             <Route path='/about' element={<About />} />
             <Route path='/detail/:id' element={<Detail />} />
@@ -64,3 +89,4 @@ function App() {
 }
 
 export default App;
+ 

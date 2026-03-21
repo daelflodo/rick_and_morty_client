@@ -36,6 +36,10 @@ export default function Nav(props) {
         <div className={styles.searchArea}>
           <SearchBar onSearch={props.onSearch} />
         </div>
+
+        <button className={styles.logoutBtn} onClick={props.logout}>
+          Log out
+        </button>
       </div>
     </nav>
   );

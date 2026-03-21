@@ -115,6 +115,28 @@
   margin-left: auto;
 }
 
+/* ===== Logout button ===== */
+.logoutBtn {
+  flex-shrink: 0;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(231, 76, 60, 0.85);
+  background: transparent;
+  border: 1px solid rgba(231, 76, 60, 0.4);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.logoutBtn:hover {
+  color: #fff;
+  border-color: rgba(231, 76, 60, 0.8);
+  background: rgba(231, 76, 60, 0.15);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 640px) {
   .inner {
