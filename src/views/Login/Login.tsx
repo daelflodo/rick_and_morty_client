@@ -13,12 +13,16 @@ interface FormData {
   password: string;
 }
 
+const DEMO_EMAIL = 'demo@rickmorty.com';
+const DEMO_PASSWORD = 'Demo1234!';
+
 export default function Login() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<AuthMode>('login');
   const [formData, setFormData] = useState<FormData>({ username: '', email: '', password: '' });
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [apiError, setApiError] = useState<string>('');
+  const [demoLoading, setDemoLoading] = useState(false);
 
   const login = useAuthStore((state) => state.login);
   const register = useAuthStore((state) => state.register);
@@ -49,6 +53,19 @@ export default function Login() {
       navigate('/home');
     } catch {
       setApiError(mode === 'login' ? 'Email o contrasena incorrectos.' : 'Error al registrarse. El email o username ya existe.');
+    }
+  }
+
+  async function handleDemoLogin(): Promise<void> {
+    setDemoLoading(true);
+    setApiError('');
+    try {
+      await login({ email: DEMO_EMAIL, password: DEMO_PASSWORD });
+      navigate('/home');
+    } catch {
+      setApiError('La cuenta demo no está disponible. Intentalo más tarde.');
+    } finally {
+      setDemoLoading(false);
     }
   }
 
@@ -115,6 +132,15 @@ export default function Login() {
           </button>
           <button type="button" className={styles.btn} onClick={toggleMode}>
             {mode === 'login' ? 'No tenes cuenta? Registrate' : 'Ya tenes cuenta? Inicia sesion'}
+          </button>
+          <div className={styles.divider}><span>o</span></div>
+          <button
+            type="button"
+            className={styles.demoBtn}
+            onClick={() => void handleDemoLogin()}
+            disabled={demoLoading}
+          >
+            {demoLoading ? 'Entrando...' : '🚀 Entrar como Demo'}
           </button>
         </form>
       </div>

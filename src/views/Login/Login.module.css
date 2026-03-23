@@ -144,3 +144,44 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+/* ===== Divider ===== */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(240, 240, 240, 0.25);
+  font-size: 0.8rem;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(151, 206, 76, 0.15);
+}
+
+/* ===== Demo button ===== */
+.demoBtn {
+  width: 100%;
+  padding: 13px;
+  border-radius: 10px;
+  border: 2px solid rgba(151, 206, 76, 0.5);
+  background: transparent;
+  color: #97ce4c;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+.demoBtn:hover:not(:disabled) {
+  background: rgba(151, 206, 76, 0.08);
+  border-color: #97ce4c;
+  transform: translateY(-1px);
+}
+.demoBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
