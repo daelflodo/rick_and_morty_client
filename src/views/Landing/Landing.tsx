@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './Landing.module.css';
 
+const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
 const FEATURES = [
   {
     icon: '🔍',
@@ -50,6 +51,11 @@ export default function Landing() {
             <button className={styles.btnOutline} onClick={() => navigate('/login')}>
               Login / Registrarse
             </button>
+            <a href={BASE_URL}>
+              <button className={styles.btnPrimary} onClick={() => navigate('/home')}>
+              Documentacion Back-end →
+            </button>
+            </a>
           </div>
         </div>
       </section>
