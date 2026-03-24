@@ -1,31 +1,26 @@
 import './App.css';
-import { type ReactNode } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
-import { useAuthStore } from './stores/authStore';
 import About from './views/About/About';
 import Detail from './views/Detail/Detail';
 import ErrorPage from './views/Error/Error';
+import Landing from './views/Landing/Landing';
 import Login from './views/Login/Login';
 import Cards from './components/Cards/Cards';
 
-function ProtectedRoute({ children }: { children: ReactNode }) {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  return isAuthenticated ? <>{children}</> : <Navigate to="/" replace />;
-}
-
 function App() {
   const location = useLocation();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const hideNav = location.pathname === '/' || location.pathname === '/login';
 
   return (
     <div className="App">
-      {location.pathname !== '/' && isAuthenticated && <Nav />}
+      {!hideNav && <Nav />}
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<ProtectedRoute><Cards /></ProtectedRoute>} />
-        <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
-        <Route path="/detail/:id" element={<ProtectedRoute><Detail /></ProtectedRoute>} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Cards />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>

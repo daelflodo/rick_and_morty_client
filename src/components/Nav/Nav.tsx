@@ -6,6 +6,7 @@ import styles from './Nav.module.css';
 
 export default function Nav() {
   const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const logout = useAuthStore((state) => state.logout);
   const loadRandom = useCharacterStore((state) => state.loadRandom);
 
@@ -17,13 +18,13 @@ export default function Nav() {
   return (
     <nav className={styles.nav}>
       <div className={styles.inner}>
-        <div className={styles.brand}>
+        <NavLink to="/" className={styles.brand}>
           <div className={styles.portalRing} />
           <div className={styles.brandText}>
             <span className={styles.brandMain}>Rick &amp; Morty</span>
             <span className={styles.brandSub}>Universe</span>
           </div>
-        </div>
+        </NavLink>
         <div className={styles.navLinks}>
           <NavLink
             to="/home"
@@ -42,7 +43,11 @@ export default function Nav() {
           <SearchBar />
         </div>
         <button className={styles.randomBtn} onClick={() => void loadRandom()}>Random</button>
-        <button className={styles.logoutBtn} onClick={handleLogout}>Log out</button>
+        {isAuthenticated ? (
+          <button className={styles.logoutBtn} onClick={handleLogout}>Log out</button>
+        ) : (
+          <button className={styles.loginBtn} onClick={() => navigate('/login')}>Login</button>
+        )}
       </div>
     </nav>
   );

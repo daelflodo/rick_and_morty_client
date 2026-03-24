@@ -185,3 +185,40 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+/* ===== Google button ===== */
+.googleBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f0f0f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+.googleBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Back link ===== */
+.backBtn {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: rgba(240, 240, 240, 0.35);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+.backBtn:hover { color: rgba(240, 240, 240, 0.7); }

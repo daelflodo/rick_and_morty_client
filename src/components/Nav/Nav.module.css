@@ -158,6 +158,26 @@
   background: rgba(231, 76, 60, 0.15);
 }
 
+.loginBtn {
+  flex-shrink: 0;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0a0f1e;
+  background: linear-gradient(135deg, #97ce4c, #3a7d0a);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.loginBtn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 640px) {
   .inner {

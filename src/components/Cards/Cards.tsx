@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   characterToDisplay,
   customToDisplay,
   favoriteToDisplay,
   useCharacterStore,
 } from '../../stores/characterStore';
+import { useAuthStore } from '../../stores/authStore';
 import type { CustomCharacterCreate } from '../../types';
 import Card from '../Card/Card';
 import styles from './Cards.module.css';
@@ -22,6 +24,8 @@ const EMPTY_FORM: CustomCharacterCreate = {
 };
 
 export default function Cards() {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const {
     exploreCharacters,
     favorites,
@@ -53,9 +57,9 @@ export default function Cards() {
   const [formData, setFormData] = useState<CustomCharacterCreate>(EMPTY_FORM);
 
   useEffect(() => {
-    void loadFavorites();
+    if (isAuthenticated) void loadFavorites();
     void loadRandom();
-  }, [loadFavorites, loadRandom]);
+  }, [loadFavorites, loadRandom, isAuthenticated]);
 
   useEffect(() => {
     if (activeTab === 'custom') void loadCustomCharacters();
@@ -90,6 +94,7 @@ export default function Cards() {
   }
 
   function handleFavoriteToggle(id: number, isFavorite: boolean): void {
+    if (!isAuthenticated) { navigate('/login'); return; }
     if (isFavorite) void removeFavorite(id);
     else void addFavorite(id);
   }
@@ -185,7 +190,7 @@ export default function Cards() {
       )}
 
       {/* My Characters header with create button */}
-      {activeTab === 'custom' && (
+      {activeTab === 'custom' && isAuthenticated && (
         <div className={styles.createRow}>
           <button className={styles.createBtn} onClick={() => setShowCreateForm(true)}>
             + New Character
@@ -213,30 +218,48 @@ export default function Cards() {
       )}
 
       {activeTab === 'favorites' && (
-        <ul className={styles.grid}>
-          {favoriteCards.map((card) => (
-            <li key={card.id}>
-              <Card card={card} onFavoriteToggle={handleFavoriteToggle} />
-            </li>
-          ))}
-        </ul>
+        isAuthenticated ? (
+          <ul className={styles.grid}>
+            {favoriteCards.map((card) => (
+              <li key={card.id}>
+                <Card card={card} onFavoriteToggle={handleFavoriteToggle} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className={styles.authMsg}>
+            <p>❤️ Iniciá sesión para ver tus favoritos</p>
+            <button className={styles.authBtn} onClick={() => navigate('/login')}>
+              Ir al Login
+            </button>
+          </div>
+        )
       )}
 
       {activeTab === 'custom' && (
-        <ul className={styles.grid}>
-          {customCards.map((card) => {
-            const original = customCharacters.find((c) => c.id === card.id)!;
-            return (
-              <li key={card.id}>
-                <Card
-                  card={card}
-                  onEdit={() => setEditingCharacter(original)}
-                  onDelete={(id) => void deleteCustomCharacter(id)}
-                />
-              </li>
-            );
-          })}
-        </ul>
+        isAuthenticated ? (
+          <ul className={styles.grid}>
+            {customCards.map((card) => {
+              const original = customCharacters.find((c) => c.id === card.id)!;
+              return (
+                <li key={card.id}>
+                  <Card
+                    card={card}
+                    onEdit={() => setEditingCharacter(original)}
+                    onDelete={(id) => void deleteCustomCharacter(id)}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div className={styles.authMsg}>
+            <p>✏️ Iniciá sesión para crear y gestionar tus personajes</p>
+            <button className={styles.authBtn} onClick={() => navigate('/login')}>
+              Ir al Login
+            </button>
+          </div>
+        )
       )}
 
       {/* Create / Edit modal */}
